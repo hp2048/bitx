@@ -13,7 +13,7 @@ foreach my $seqcounter (sort {$a<=>$b} keys %$seqs){
 	print ALL ">$$seqs{$seqcounter}{'id'}".":$frame\n";
 	print ALL "$translation\n";
 	
-	while ($translation=~/(M\w{$minLen,$maxLen}\*)/g){
+	while ($translation=~/(M\w{$minLen-2,$maxLen-2}\*)/g){
      my $orf   = $1;
      my $start = (pos($translation) - length($orf)) * 3 + 1;
      my $end   = pos($translation) * 3;
