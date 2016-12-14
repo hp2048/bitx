@@ -1,7 +1,8 @@
 #!/usr/bin/perl -w
 use strict;
 my ($infile, $outbase, $minLen, $maxLen) = @ARGV;
-
+$minLen = (($minLen - 2) > 2) ? $minLen - 2 : 2;
+$maxLen = (($maxLen - 2) > 2) ? $maxLen - 2 : 2;
 open (ALL, ">$outbase.all.fasta") or die $!;
 open (ORF, ">$outbase.orf.fasta") or die $!;
 my $seqs = readFasta($infile);
@@ -13,7 +14,7 @@ foreach my $seqcounter (sort {$a<=>$b} keys %$seqs){
 	print ALL ">$$seqs{$seqcounter}{'id'}".":$frame\n";
 	print ALL "$translation\n";
 	
-	while ($translation=~/(M\w{$minLen-2,$maxLen-2}\*)/g){
+	while ($translation=~/(M\w{$minLen,$maxLen}\*)/g){
      my $orf   = $1;
      my $start = (pos($translation) - length($orf)) * 3 + 1;
      my $end   = pos($translation) * 3;
