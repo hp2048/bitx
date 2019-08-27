@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-open (F, "<$ARGV[0]") or die $!; #assembly report file ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/747/795/GCF_900747795.1_fErpCal1.1
+#This script is used to modify sequence identifiers in GTF files provided by NCBI RefSeq to chromosome names. This is not tested on all species. Use with caution.
 
-#Super_Scaffold_2	assembled-molecule	1	Chromosome	LR536432.1	=	NC_041394.1	Primary Assembly	350098611	na
+open (F, "<$ARGV[0]") or die $!; #assembly report file ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/900/747/795/GCF_900747795.1_fErpCal1.1
 
 my %chrnames = ();
 while (<F>) {
@@ -31,3 +31,4 @@ while (<G>) {
 }
 
 close G;
+exit;
